@@ -46,7 +46,7 @@ defmodule SendInBlue.MixProject do
     [
       {:bypass, "~> 1.0", only: :test},
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
-      {:hackney, "~> 1.12.1"},
+      {:hackney, "~> 1.13"},
       {:jason, "~> 1.0"},
     ]
   end
