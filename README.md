@@ -22,12 +22,12 @@ To make API calls, it is necessary to configure your SendInBlue API key.
 ```ex
 use Mix.Config
 
-config SendInBlue, api_key: "YOUR-API-KEY"
+config :sendinbluex, api_key: "YOUR-API-KEY"
 ```
 
 The Tracker API uses a different key that has to be configured separately:
 ```ex
-config SendInBlue, tracking_id: "abc123456789"
+config :sendinbluex, tracking_id: "abc123456789"
 ```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)

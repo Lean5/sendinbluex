@@ -13,7 +13,7 @@ defmodule SendInBlue.Api do
   @typep http_failure :: {:error, term}
 
   @pool_name __MODULE__
-  @http_module Application.get_env(SendInBlue, :http_module) || :hackney
+  @http_module Application.get_env(:sendinbluex, :http_module) || :hackney
 
   def supervisor_children do
     if use_pool?(),
@@ -64,17 +64,17 @@ defmodule SendInBlue.Api do
   end
 
   @spec get_pool_options() :: Keyword.t()
-  defp get_pool_options(), do: Application.get_env(SendInBlue, :pool_options)
+  defp get_pool_options(), do: Application.get_env(:sendinbluex, :pool_options)
 
   @spec get_base_url() :: String.t()
-  defp get_base_url(), do: Application.get_env(SendInBlue, :api_base_url)
+  defp get_base_url(), do: Application.get_env(:sendinbluex, :api_base_url)
 
   @spec get_tracker_base_url() :: String.t()
-  defp get_tracker_base_url(), do: Application.get_env(SendInBlue, :tracker_base_url)
+  defp get_tracker_base_url(), do: Application.get_env(:sendinbluex, :tracker_base_url)
 
   @spec get_default_api_key() :: String.t()
   defp get_default_api_key() do
-    case Application.get_env(SendInBlue, :api_key) do
+    case Application.get_env(:sendinbluex, :api_key) do
       nil -> "" # use an empty string and let SendInBlue produce an error
       key -> key
     end
@@ -82,7 +82,7 @@ defmodule SendInBlue.Api do
 
   @spec get_default_tracking_id() :: {String.t(), String.t()}
   defp get_default_tracking_id() do
-    key = case Application.get_env(SendInBlue, :tracking_id) do
+    key = case Application.get_env(:sendinbluex, :tracking_id) do
       nil -> "" # use an empty string and let SendInBlue produce an error
       key -> key
     end
@@ -90,7 +90,7 @@ defmodule SendInBlue.Api do
   end
 
   @spec use_pool?() :: boolean
-  defp use_pool?(), do: Application.get_env(SendInBlue, :use_connection_pool)
+  defp use_pool?(), do: Application.get_env(:sendinbluex, :use_connection_pool)
 
   @spec perform_request(String.t(), method, body, headers, list) :: {:ok, map} | {:error, SendInBlue.Error.t()}
   defp perform_request(req_url, method, body, headers, opts) do    

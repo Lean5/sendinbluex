@@ -4,7 +4,7 @@ defmodule SendInBlue.Tracker do
 
   Configuration:
   ```
-  config SendInBlue.Tracker
+  config :sendinbluex
     tracking_id: "<your marketing automation tracking id>"
   ```
 

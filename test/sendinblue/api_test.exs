@@ -7,10 +7,10 @@ defmodule SendInBlue.ApiTest do
   setup do
     bypass = Bypass.open
 
-    Application.put_env(SendInBlue, :api_base_url, "http://localhost:#{bypass.port}/")
-    Application.put_env(SendInBlue, :api_key, @api_key)
-    Application.put_env(SendInBlue, :tracker_base_url, "http://localhost:#{bypass.port}/")
-    Application.put_env(SendInBlue, :tracking_id, @tracking_id)
+    Application.put_env(:sendinbluex, :api_base_url, "http://localhost:#{bypass.port}/")
+    Application.put_env(:sendinbluex, :api_key, @api_key)
+    Application.put_env(:sendinbluex, :tracker_base_url, "http://localhost:#{bypass.port}/")
+    Application.put_env(:sendinbluex, :tracking_id, @tracking_id)
 
     {:ok, bypass: bypass}
   end

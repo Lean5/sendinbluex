@@ -3,7 +3,7 @@ defmodule SendInBlue.ContactTest do
 
   setup do
     bypass = Bypass.open
-    Application.put_env(SendInBlue, :api_base_url, "http://localhost:#{bypass.port}/v3/")
+    Application.put_env(:sendinbluex, :api_base_url, "http://localhost:#{bypass.port}/v3/")
     {:ok, bypass: bypass}
   end
 

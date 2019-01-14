@@ -7,15 +7,15 @@ defmodule SendInBlue do
   ### API Key
   You need to set your API key in your application configuration. Typically
   this is done in `config/config.exs` or a similar file. For example:
-      config SendInBlue, api_key: "abc123456789"
+      config :sendinbluex, api_key: "abc123456789"
   You can also utilize `System.get_env/1` to retrieve the API key from an
   environment variable, but remember that this can cause issues if you use
   a release tool like exrm or Distillery.
-      config SendInBlue, api_key: System.get_env("SEND_IN_BLUE_API_KEY")
+      config :sendinbluex, api_key: System.get_env("SEND_IN_BLUE_API_KEY")
 
   ### Marketing Automation Tracking
   The Tracker API uses a different key that has to be configured separately:
-      config SendInBlue, tracking_id: "abc123456789"
+      config :sendinbluex, tracking_id: "abc123456789"
 
   ### HTTP Connection Pool
   SendInBlue is set up to use an HTTP connection pool by default. This means
@@ -30,12 +30,12 @@ defmodule SendInBlue do
   at any time. This defaults to 10.
   Both these settings are located under the `:pool_options` key in your
   application configuration:
-      config SendInBlue, :pool_options,
+      config :sendinbluex, :pool_options,
         timeout: 5_000,
         max_connections: 10
   If you prefer, you can also turn pooling off completely using the
   `:use_connection_pool` setting:
-      config SendInBlue, use_connection_pool: false
+      config :sendinbluex, use_connection_pool: false
   """
   use Application
 

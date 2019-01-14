@@ -4,7 +4,7 @@ defmodule SendInBlue.TrackerTest do
   setup do
     bypass = Bypass.open
 
-    Application.put_env(SendInBlue, :tracker_base_url, "http://localhost:#{bypass.port}/api/v2/")
+    Application.put_env(:sendinbluex, :tracker_base_url, "http://localhost:#{bypass.port}/api/v2/")
 
     {:ok, bypass: bypass}
   end
