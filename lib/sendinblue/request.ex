@@ -71,6 +71,7 @@ defmodule SendInBlue.Request do
   """
   @spec put_params(t, map) :: t
   def put_params(%Request{params: params} = request, new_params) do
+    new_params = Map.delete(new_params, :__struct__)
     %{request | params: Map.merge(params, new_params)}
   end
 
