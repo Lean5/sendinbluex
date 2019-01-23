@@ -136,7 +136,7 @@ defmodule SendInBlue.Api do
 
   @spec add_default_options(list) :: list
   defp add_default_options(opts) do
-    [:with_body | opts]
+    [{:connect_timeout, 24000}, {:recv_timeout, 10000}, :with_body | opts]
   end
 
   @spec add_pool_option(list) :: list
