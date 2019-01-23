@@ -88,7 +88,7 @@ defmodule SendInBlue.Error do
   def from_send_in_blue_error(status, %{"code" => code, "message" => msg}) do
     %__MODULE__{
       source: :send_in_blue,
-      code: String.to_existing_atom(code),
+      code: String.to_atom(code),
       message: msg,
       extra: %{http_status: status}
     }
