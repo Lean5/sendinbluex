@@ -77,6 +77,20 @@ defmodule SendInBlue.Contact do
     |> make_request()
   end
 
+  @spec list(params, SendInBlue.options()) :: {:ok, %{contacts: [Contact.t()]}} | {:error, SendInBlue.Error.t()}
+    when params: %{
+      optional(:limit) => non_neg_integer(),
+      optional(:offset) => non_neg_integer()
+    }
+  def list(params \\ %{}, opts \\ []) do
+    new_request(opts)
+    |> put_endpoint(@contacts)
+    |> put_params(params)
+    |> put_method(:get)
+    |> put_result_type(%{contacts: [Contact]})
+    |> make_request()
+  end
+
   @spec get_attributes(SendInBlue.options()) :: {:ok, %{attributes: list(map())}} | {:error, SendInBlue.Error.t()}
   def get_attributes(opts \\ []) do
     new_request(opts)

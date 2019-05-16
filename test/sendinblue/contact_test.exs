@@ -171,6 +171,60 @@ defmodule SendInBlue.ContactTest do
     assert {:ok, expected} == SendInBlue.Contact.get(%{email: "test@mail.com"})
   end
 
+  test "list", %{bypass: bypass} do
+    Bypass.expect_once bypass, "GET", "/v3/contacts/", fn conn ->
+      Plug.Conn.resp(conn, 200, "{\"contacts\": [" <> @contact_details <> "," <> @contact_details <> "]}")
+    end
+    expected = %SendInBlue.Contact{
+      attributes: %{"FIRST_NAME" => "first", "LAST_NAME" => "last"},
+      email: "test@mail.com",
+      email_blacklisted: true,
+      id: 5,
+      list_ids: [2],
+      modified_at: "2019-01-07T14:59:34.424+01:00",
+      sms_blacklisted: false,
+      statistics: %{
+        clicked: [
+          %{
+            "campaignId" => 1,
+            "links" => [
+              %{
+                "count" => 1,
+                "eventTime" => "2018-12-18T15:50:44.493+01:00",
+                "ip" => "123.456.489.123",
+                "url" => "https://dummy.com"
+              }
+            ]
+          }
+        ],
+        messages_sent: [
+          %{
+            "campaignId" => 1,
+            "eventTime" => "2018-12-18T15:47:01.108+01:00"
+          }
+        ],
+        opened: [
+          %{
+            "campaignId" => 1,
+            "count" => 1,
+            "eventTime" => "2018-12-18T15:49:42.309+01:00",
+            "ip" => "123.456.489.123"
+          }
+        ],
+        unsubscriptions: %{
+          "adminUnsubscription" => [
+            %{
+              "eventTime" => "2019-01-07T14:59:34.424+01:00",
+              "ip" => "123.456.489.123"
+            }
+          ],
+          "userUnsubscription" => []
+        }
+      }
+    }
+    assert {:ok, %{contacts: [expected, expected]}} == SendInBlue.Contact.list()
+  end
+
   @attributes """
     {
       "attributes": [
